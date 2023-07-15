@@ -1,0 +1,37 @@
+/* RegistrationForm.css */
+
+.form-body {
+  top: 90px;
+  right: 50%;
+  flex-grow: 1;
+  padding: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+}
+
+.submit{
+  margin-top: 60px;
+  border: none;
+  border-radius: 100px;
+  background-color: #0091ff;
+  color: #fff;
+  padding: 10px;
+  transition: backgroundColor 0.3s ease;
+  padding: 15px;
+}
+
+.form-a{
+  margin-left:15px;
+  font-weight:600;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.form-h1{
+  margin-bottom:40px;
+}

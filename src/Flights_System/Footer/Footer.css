@@ -1,0 +1,41 @@
+/* Footer.css */
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.789);
+    color: white;
+    padding: 20px;
+    bottom: 0;
+    margin-left: 200px;
+    margin-top: 150px;
+    width: 1700px;
+  }
+  
+  .footer-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .footer-column {
+    width: 48%;
+  }
+  
+  .footer-ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-rights {
+    margin-left: 1300px;
+    margin-top: 40px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+  }
