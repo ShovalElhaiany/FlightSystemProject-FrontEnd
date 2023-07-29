@@ -1,0 +1,63 @@
+.generic-table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .generic-table {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .generic-table thead {
+    background-color: #70a1d1a9;
+  }
+  
+  .generic-table th {
+    padding: 16px;
+    text-align: left;
+  }
+  
+  .generic-table tbody tr:nth-child(even) {
+    background-color: #d5d5d5;
+  }
+  
+  .generic-table td {
+    padding: 16px;
+  }
+  
+  .cell-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .row-button {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .row-button:hover {
+    background-color: #f9f9f9;
+  }
+  
+  @keyframes tableFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .generic-table {
+    animation: tableFadeIn 0.6s ease;
+  }
+  

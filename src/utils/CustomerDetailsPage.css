@@ -1,0 +1,60 @@
+.customer-details-page {
+  display: flex;
+  height: 100vh;
+}
+
+.customer-details-container {
+  width: 600px;
+  height: 800px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.customer-photo {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 50px;
+}
+
+.customer-photo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50px;
+  width: 160px;
+  height: 160px;
+}
+
+.customer-photo header{
+  font-weight: bold;
+  margin-left: 60px;
+  margin-top: 50px;
+  font-size: 40px;
+}
+
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size:20px;
+}
+
+.customer-table td {
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.customer-table td:first-child {
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.tickets {
+  font-weight: bold;
+  padding-right: 10px;
+}

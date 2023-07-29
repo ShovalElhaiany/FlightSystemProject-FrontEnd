@@ -1,0 +1,59 @@
+.image-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.image-container {
+  position: relative;
+}
+
+.rounded-image {
+  width: 1302px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.title-container {
+  position: absolute;
+  top: 80px;
+  left: 100px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.small-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.imageComponent-container {
+  position: absolute;
+  top: 110px;
+  left: 100px;
+  
+}
+
+.big-headline {
+  margin: 0;
+  font-size: 80px;
+  color: rgb(255, 255, 255);
+}
+
+.learn-more-button {
+  margin-top: 15px ;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffffd3;
+  color: #000000;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.learn-more-button:hover {
+  background-color: #c2c2c2d5;
+}
