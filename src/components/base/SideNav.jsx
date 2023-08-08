@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/bases/SideNav.css';
+import '../../css/base/SideNav.css';
 
 const SideNav = () => {
   return (

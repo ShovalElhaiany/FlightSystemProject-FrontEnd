@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/bases/Ad.css';
+import '../../css/base/Ad.css';
 
 const Ad = () => {
   return (

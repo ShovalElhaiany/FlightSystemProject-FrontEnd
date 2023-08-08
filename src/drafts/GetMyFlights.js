@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiFunctions from './api.js';
+import apiFunctions from '../api/RequestsGenerator.js';
 
 const GetMyFlights = () => {
   const [customerId, setCustomerId] = useState('');

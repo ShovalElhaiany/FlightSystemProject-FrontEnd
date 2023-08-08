@@ -1,9 +1,8 @@
 import React from 'react';
-import '../../css/generics/GenericTable.css';
+import '../../css/table/GenericTable.css';
 
 const GenericTable = ({ data, columns }) => {
   const handleRowClick = (rowData) => {
-    alert("asdasdasdawsd")
     console.log('Row clicked:', rowData);
   };
 

@@ -2,15 +2,15 @@ import React from 'react';
 import './MainPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import TopNav from '../components/bases/TopNav.jsx';
-import SideNav from '../components/bases/SideNav.jsx';
-import Ad from '../components/bases/Ad.jsx';
-import Footer from '../components/bases/Footer.jsx';
+import TopNav from '../components/base/TopNav.jsx';
+import SideNav from '../components/base/SideNav.jsx';
+import Ad from '../components/base/Ad.jsx';
+import Footer from '../components/base/Footer.jsx';
 import Home from '../components/anonymous/Home.jsx';
 import Registration from '../components/anonymous/Registration.jsx';
 // import CustomerDetailsPage from './CustomerDetailsPage.jsx'
 import Login from '../components/anonymous/Login.jsx';
-import GenericTable from '../components/generics/GenericTable.jsx';
+import GenericTable from './GenericTable.jsx';
 
 const data = [
   { id: 1, name: 'John Doe', age: 30, email: 'john@example.com' },

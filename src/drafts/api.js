@@ -19,6 +19,21 @@ const sendRequest = async (method, url, data = null) => {
   }
 };
 const apiFunctions = {
+
+  // Base APIs
+  getAllFlights: () => sendRequest('GET', '/flights'),
+  getFlightById: (flightId) => sendRequest('GET', `/flights/${flightId}`),
+  getFlightsByParameters: () => sendRequest('GET', '/flights/parameters'),
+  getAllAirlines: () => sendRequest('GET', '/airlines'),
+  getAirlineById: (airlineId) => sendRequest('GET', `/airlines/${airlineId}`),
+  getAirlineByParameters: () => sendRequest('GET', '/airlines/parameters'),
+  getAllCountries: () => sendRequest('GET', '/countries'),
+  getCountryById: (countryId) => sendRequest('GET', `/countries/${countryId}`),
+
+  // Anonymous APIs
+  login: (data) => sendRequest('POST', '/login', data),
+  addCustomer: (data) => sendRequest('POST', '/add_customers', data),
+
   // Airline APIs
   updateAirline: (airlineId, data) => sendRequest('PUT', `/airlines/${airlineId}`, data),
   addFlight: (data) => sendRequest('POST', '/flights', data),
@@ -39,6 +54,8 @@ const apiFunctions = {
   addTicket: (data) => sendRequest('POST', '/tickets', data),
   removeTicket: (ticketId) => sendRequest('DELETE', `/tickets/${ticketId}`),
   getMyTickets: (customerId) => sendRequest('GET', `/tickets/customer/${customerId}`),
+  test: () => sendRequest('GET', `/get/customers`),
+  
 };
 
 export default apiFunctions;

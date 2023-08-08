@@ -1,7 +1,7 @@
 import { faCircleInfo, faEnvelope, faHouse, faMusic, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import '../../css/bases/Footer.css';
+import '../../css/base/Footer.css';
 
 function Footer() {
   return (

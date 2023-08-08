@@ -1,136 +1,210 @@
-const AnonymousContainer = {
-    'Home': {
-        'url': '/Home',
-        'container': <Home/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+import Home from '../components/anonymous/Home'
+import Login from '../components/anonymous/Login'
+import Registration from '../components/anonymous/Registration'
+
+const AnonymousOptions = {
+    Home: {
+        url: '/Home',
+        container: <Home/>,
+        tableSettings: {
+            title: [],
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
         }
     },
-    'Login': {
-        'url': '/Login',
-        'container': <Login/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    Login: {
+        url: '/Login',
+        container: <Login/>,
+        tableSettings: {
+            title: [],
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
+        },
+        apis: {
+            apiArray: 'AnonymousAPIs',
+            loginApi: 'login'
         }
     },
-    'Registration': {
-        'url': '/Registration',
-        'container': <Registration/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    Registration: {
+        url: '/Registration',
+        container: <Registration/>,
+        tableSettings: {
+            title: [],
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
+        },
+        apis: {
+            apiArray: 'AnonymousAPIs',
+            Registration: 'addCustomer'
         }
     },
-    'FlightsTable': {
-        'url': '/FlightsTable',
-        'container': <FlightsTable/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    FlightsTable: {
+        url: '/FlightsTable',
+        tableSettings: {
+            title: 'FlightsTable',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
+        },
+        apis: {
+            apiArray: 'BaseAPIs',
+            getApi: 'getAllFlights',
+            searchApi: ['getFlightById', 'getFlightsByParameters']
         }
     },
-    'FlightDetails': {
-        'url': '/FlightDetails',
-        'container': <FlightDetails/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    FlightDetails: {
+        url: '/FlightDetails',
+        tableSettings: {
+            title: 'FlightDetails',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
+        },
+    },
+    AirlinesTable: {
+        url: '/AirlinesTable',
+        tableSettings: {
+            title: 'AirlinesTable',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
+        },
+        apis: {
+            apiArray: 'BaseAPIs',
+            gethApi: 'getAllAirlines',
+            searchApi: ['getAirlineById', 'getAirlineByParameters']
         }
     },
-    'AirlinesTable': {
-        'url': '/AirlinesTable',
-        'container': <AirlinesTable/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    AirlineDetails: {
+        url: '/AirlineDetails',
+        tableSettings: {
+            title: 'AirlineDetails',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
         }
     },
-    'AirlineDetails': {
-        'url': '/AirlineDetails',
-        'container': <AirlineDetails/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    CountriesTable: {
+        url: '/CountriesTable',
+        tableSettings: {
+            title: 'CountriesTable',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: true,
+            filterByParameters: []
+        },
+        apis: {
+            apiArray: 'BaseAPIs',
+            getApi: 'getAllCountries',
+            searchApi: ['getCountryById']
         }
     },
-    'CountriesTable': {
-        'url': '/CountriesTable',
-        'container': <CountriesTable/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': true,
-            'fliter_by_parameters': false
+    CountryDetails: {
+        url: '/CountryDetails',
+        tableSettings: {
+            title: 'CountryDetails',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
         }
     },
-    'CountryDetails': {
-        'url': '/CountryDetails',
-        'container': <CountryDetails/>,
-        'options': {
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    TicketsTable: {
+        url: '/TicketsTable',
+        tableSettings:{
+            title: 'TicketsTable',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
         }
     },
-    'TicketsTable': {
-        'url': '/TicketsTable',
-        'container': <TicketsTable/>,
-        'Options':{
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
-        }
-    },
-    'TicketDetails': {
-        'url': '/TicketDetails',
-        'container': <TicketDetails/>,
-        'Options':{
-            'get': true,
-            'add': false,
-            'update': false,
-            'delete': false,
-            'fliter_by_Id': false,
-            'fliter_by_parameters': false
+    TicketDetails: {
+        url: '/TicketDetails',
+        tableSettings:{
+            title: 'TicketDetails',
+            image: [],
+            subjects: [],
+            details: [],
+            singular: true,
+            allowGet: true,
+            allowAdd: false,
+            allowUpdate: false,
+            allowDelete: false,
+            filterById: false,
+            filterByParameters: []
         }
     }
 }
 
-export default AnonymousContainer;
+export default AnonymousOptions;

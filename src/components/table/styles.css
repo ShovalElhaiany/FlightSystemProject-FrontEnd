@@ -1,0 +1,117 @@
+/* styles.css */
+
+.GenericTable body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.GenericTable .container {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  max-width: 800px;
+}
+
+.GenericTable .title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.GenericTable .table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.GenericTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+.subject {
+  font-weight: bold
+}
+
+form div {
+  border-bottom: 1px solid #ccc;
+  padding: 12px 0;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Additional styles for GenericSearch */
+.GenericSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.GenericSearch input {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Responsive styles for small screens */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  form div {
+    padding: 8px 0;
+  }
+
+  .GenericSearch input {
+    padding: 6px 12px;
+    margin-right: 4px;
+  }
+}
