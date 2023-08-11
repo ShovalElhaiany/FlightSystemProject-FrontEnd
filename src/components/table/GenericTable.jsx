@@ -76,7 +76,7 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
   };
 
   const handleSearch = (searchCriteria) => {
-    onSearch('??????????????')
+    onSearch(searchCriteria)
     console.log('Search Criteria:', searchCriteria);
   };
 

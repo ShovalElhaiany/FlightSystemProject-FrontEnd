@@ -1,165 +1,41 @@
-const serverApis = {
+const api = (method, url, id = false, data = false) => ({ method, url, id, data });
 
-    BaseAPIs: {
-        getAllFlights: {
-            method: 'GET',
-            url: '/get/flights',
-            id: false,
-            data: false
-        },
-        getFlightById: {
-            method: 'GET',
-            url: '/get/flights',
-            id: true,
-            data: false
-        },
-        getFlightsByParameters: {
-            method: 'GET',
-            url: '/get/flights/parameters',
-            id: false,
-            data: false
-        },
-        getAllAirlines: {
-            method: 'GET',
-            url: '/get/airlines',
-            id: false,
-            data: false
-        },
-        getAirlineById: {
-            method: 'GET',
-            url: '/get/airlines',
-            id: true,
-            data: false
-        },
-        getAirlineByParameters: {
-            method: 'GET',
-            url: '/get/airlines/parameters',
-            id: false,
-            data: false
-        },
-        getAllCountries: {
-            method: 'GET',
-            url: '/get/countries',
-            id: false,
-            data: false
-        },
-        getCountryById: {
-            method: 'GET',
-            url: '/get/countries',
-            id: true,
-            data: false
-        }
+const serverApis = {
+    BaseApi : {
+        getAllFlights: api('GET', '/get/flights'),
+        getFlightById: api('GET', '/get/flights', true),
+        getFlightsByParameters: api('GET', '/get/flights/parameters'),
+        getAllAirlines: api('GET', '/get/airlines'),
+        getAirlineById: api('GET', '/get/airlines', true),
+        getAirlineByParameters: api('GET', '/get/airlines/parameters'),
+        getAllCountries: api('GET', '/get/countries'),
+        getCountryById: api('GET', '/get/countries', true),
     },
-    AnonymousAPIs: {
-        login: {
-            method: 'POST',
-            url: '/user/login',
-            id: false,
-            data: true
-        },
-        addCustomer: {
-            method: 'POST',
-            url: '/user/add_customers',
-            id: false,
-            data: true
-        },
+    AnonymousApis : {
+        login: api('POST', '/user/login', true),
+        addCustomer: api('POST', '/user/add_customers', true),
     },
-    AirlineAPIs: {
-        updateAirline:{
-                method: 'PUT',
-                url: '/update/airlines',
-                id: true,
-                data: true
-        },
-        addFlight:{
-                method: 'POST',
-                url: '/add/flights',
-                id: false,
-                data: true
-        },
-        updateFlight:{
-                method: 'PUT',
-                url: '/update/flights',
-                id: true,
-                data: true
-        },
-        removeFlight:{
-                method: 'DELETE',
-                url: '/remove/flights',
-                id: true,
-                data: false
-        },
-        getMyFlights:{
-            method: 'GET',
-            url: '/get/flights',
-            id: true,
-            data: false
-        },
+    AirlineApis : {
+        updateAirline: api('PUT', '/update/airlines', true, true),
+        addFlight: api('POST', '/add/flights', true),
+        updateFlight: api('PUT', '/update/flights', true, true),
+        deleteFlight: api('DELETE', '/delete/flights', true),
+        getMyFlights: api('GET', '/get/flights', true),
     },
-    AdministratorAPIs: {
-        getAllCustomers:{
-            method: 'GET',
-            url: '/get/customers',
-            id: false,
-            data: false
-        },
-        addAirline:{
-            method: 'POST',
-            url: '/add/add_airlines',
-            id: false,
-            data: true
-        },
-        addAdministrator:{
-            method: 'POST',
-            url: '/add/add_administrators',
-            id: false,
-            data: true
-        },
-        removeAirline:{
-            method: 'DELETE',
-            url: '/remove/airlines',
-            id: true,
-            data: false
-        },
-        removeCustomer:{
-            method: 'DELETE',
-            url: '/remove/customers',
-            id: true,
-            data: false
-        },
-        removeAdministrator:{
-            method: 'DELETE',
-            url: '/remove/administrators',
-            id: true,
-            data: false
-        },
+    AdminApis : {
+        getAllCustomers: api('GET', '/get/customers'),
+        addAirline: api('POST', '/add/add_airlines', true),
+        addAdministrator: api('POST', '/add/add_administrators', true),
+        deleteAirline: api('DELETE', '/delete/airlines', true),
+        deleteCustomer: api('DELETE', '/delete/customers', true),
+        deleteAdministrator: api('DELETE', '/delete/administrators', true),
     },
-    CustomerAPIs: {
-        updateCustomer:{
-            method: 'PUT',
-            url: '/update/customers',
-            id: true,
-            data: true
-        },
-        addTicket:{
-            method: 'POST',
-            url: '/add/tickets',
-            id: false,
-            data: true
-        },
-        removeTicket:{
-            method: 'DELETE',
-            url: '/remove/tickets',
-            id: true,
-            data: false
-        },
-        getMyTickets:{
-            method: 'GET',
-            url: '/get/tickets/customer',
-            id: true,
-            data: false
-        },
-    }
-}
+    CustomerApis : {
+        updateCustomer: api('PUT', '/update/customers', true, true),
+        addTicket: api('POST', '/add/tickets', true),
+        deleteTicket: api('DELETE', '/delete/tickets', true),
+        getMyTickets: api('GET', '/get/tickets/customer', true),
+    },
+};
 
 export default serverApis;

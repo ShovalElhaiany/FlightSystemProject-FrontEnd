@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 
-const GenericSearch = ({ filterById, filterByParameters, onSearch }) => {
-  const [idFilter, setIdFilter] = useState('');
+const GenericSearch = ({ filterByParameters, onSearch }) => {
   const [parameters, setParameters] = useState({});
 
   const handleSearch = () => {
     const searchCriteria = {};
-    if (filterById) {
-      searchCriteria.id = idFilter;
-    }
     if (filterByParameters) {
       Object.keys(parameters).forEach((key) => {
         if (parameters[key]) {
@@ -22,15 +18,6 @@ const GenericSearch = ({ filterById, filterByParameters, onSearch }) => {
 
   return (
     <div>
-      {filterById && (
-        <input
-          type="text"
-          placeholder="Filter by ID"
-          value={idFilter}
-          onChange={(e) => setIdFilter(e.target.value)}
-        />
-      )}
-
       {filterByParameters &&
         filterByParameters.map((param) => (
           <input
@@ -42,7 +29,7 @@ const GenericSearch = ({ filterById, filterByParameters, onSearch }) => {
           />
         ))}
 
-      {(filterById || (filterByParameters && filterByParameters.length > 0)) && (
+      {(filterByParameters && filterByParameters.length > 0) && (
         <button onClick={handleSearch}>Search</button>
       )}
     </div>

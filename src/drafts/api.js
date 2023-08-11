@@ -38,21 +38,21 @@ const apiFunctions = {
   updateAirline: (airlineId, data) => sendRequest('PUT', `/airlines/${airlineId}`, data),
   addFlight: (data) => sendRequest('POST', '/flights', data),
   updateFlight: (flightId, data) => sendRequest('PUT', `/flights/${flightId}`, data),
-  removeFlight: (flightId) => sendRequest('DELETE', `/flights/${flightId}`),
+  deleteFlight: (flightId) => sendRequest('DELETE', `/flights/${flightId}`),
   getMyFlights: (customerId) => sendRequest('GET', `/flights/customer/${customerId}`),
 
   // Administrator APIs
   getAllCustomers: () => sendRequest('GET', '/customers'),
   addAirline: (data) => sendRequest('POST', '/add_airlines', data),
   addAdministrator: (data) => sendRequest('POST', '/add_administrators', data),
-  removeAirline: (airlineId) => sendRequest('DELETE', `/airlines/${airlineId}`),
-  removeCustomer: (customerId) => sendRequest('DELETE', `/customers/${customerId}`),
-  removeAdministrator: (adminId) => sendRequest('DELETE', `/administrators/${adminId}`),
+  deleteAirline: (airlineId) => sendRequest('DELETE', `/airlines/${airlineId}`),
+  deleteCustomer: (customerId) => sendRequest('DELETE', `/customers/${customerId}`),
+  deleteAdministrator: (adminId) => sendRequest('DELETE', `/administrators/${adminId}`),
 
   // Customer APIs
   updateCustomer: (customerId, data) => sendRequest('PUT', `/customers/${customerId}`, data),
   addTicket: (data) => sendRequest('POST', '/tickets', data),
-  removeTicket: (ticketId) => sendRequest('DELETE', `/tickets/${ticketId}`),
+  deleteTicket: (ticketId) => sendRequest('DELETE', `/tickets/${ticketId}`),
   getMyTickets: (customerId) => sendRequest('GET', `/tickets/customer/${customerId}`),
   test: () => sendRequest('GET', `/get/customers`),
   

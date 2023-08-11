@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import GenericTable from './GenericTable';
-import buildApiFunction from '../../api/RequestsGenerator.js';
+import  GenericTable  from './GenericTable';
+import  buildApiFunction  from '../../api/RequestsGenerator.js';
 
 const GenericReceiver = ({ containerKey }) => {
   const [data, setData] = useState(null);
@@ -10,47 +10,14 @@ const GenericReceiver = ({ containerKey }) => {
 
   const idFromURL = window.location.pathname.split('/').pop();
 
-  const getApiParams = {
-    id: containerKey.apis.get.id,
-    method: containerKey.apis.get.method,
-    url: containerKey.apis.get.url,
-    data: containerKey.apis.get.data
-  };
-
-  const addApiParams = {
-    id: containerKey.apis.add.id,
-    method: containerKey.apis.add.method,
-    url: containerKey.apis.add.url,
-    data: containerKey.apis.add.data
-  };
-
-  const updateApiParams = {
-    method: containerKey.apis.update.method,
-    url: containerKey.apis.update.url,
-    id: containerKey.apis.update.id,
-    data: containerKey.apis.update.data
-  };
-
-  // const deleteApiParams = {
-  //   method: containerKey.apis.delete.method,
-  //   url: containerKey.apis.delete.url,
-  //   id: containerKey.apis.delete.id,
-  //   data: containerKey.apis.delete.data
-  // };
-  
+  const apiParams = (operation) => containerKey.apis[operation];
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
       const idParam = containerKey.tableSettings.singular ? idFromURL : undefined;
-      const HTTPrequest = buildApiFunction({ ...getApiParams, id: idParam });
+      const HTTPrequest = buildApiFunction({ ...apiParams('get'), id: idParam });
       const response = await HTTPrequest();  
-      // const response = {id: 1, name: 'Albania'}
-      // const response = [
-      //   {"id":1, "name":"Albaasdasdnia"},
-      //   {"id":2, "name":"Argeasdasdntina"},
-      //   {"id":3, "name":"Armasasddenia"}
-      // ]  
       if (response) {
         settableSettings(containerKey.tableSettings)
         setData(response);
@@ -65,6 +32,14 @@ const GenericReceiver = ({ containerKey }) => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const extractSubjectsAndDetails = () => {
     let subjects = [];
@@ -81,20 +56,20 @@ const GenericReceiver = ({ containerKey }) => {
     const tableWithInfo = { ...tableSettings, subjects, details };
     return tableWithInfo;
   };
-  
-  
 
-  useEffect(() => {
+  const handleAdd = async (newData) => {
+    try {
+      const HTTPrequest = buildApiFunction({ ...apiParams('add'), data: newData });
+      const response = await HTTPrequest();
+
+      if (Array.isArray(data)) {
+        setData(data);
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage(`Error adding data: ${error.message}`);
+    }
     fetchData();
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const handleDelete = (selectedRows) => {
-    // ?????????????
-    console.log('Delete Table Rows:', selectedRows);
   };
 
   const handleUpdate = async (tableData) => {
@@ -109,7 +84,7 @@ const GenericReceiver = ({ containerKey }) => {
   
       const itemId = updatedItem.id;
   
-      const HTTPrequest = buildApiFunction({ ...updateApiParams, data: updatedItem, id: itemId });
+      const HTTPrequest = buildApiFunction({ ...apiParams('update'), data: updatedItem, id: itemId });
       const response = await HTTPrequest();
   
       if (Array.isArray(data)) {
@@ -121,27 +96,56 @@ const GenericReceiver = ({ containerKey }) => {
       console.error(error);
       setMessage(`Error updating data: ${error.message}`);
     }
+    fetchData();
   };  
-  
-  const handleAdd = async (newData) => {
-    try {
-      const HTTPrequest = buildApiFunction({ ...addApiParams, data: newData });
-      const response = await HTTPrequest();
 
-      if (Array.isArray(data)) {
-        setData(data);
+  const handleDelete = async (selectedRows) => {
+    try {
+      setIsLoading(true);
+  
+      for (const index of selectedRows) {
+        const itemToDelete = data[index];
+        const id = containerKey.apis.delete.id ? itemToDelete.id : undefined;
+        const HTTPrequest = buildApiFunction({ ...apiParams('delete'), id });
+        await HTTPrequest();
       }
+  
+      const updatedData = data.filter((_, index) => !selectedRows.includes(index));
+      setData(updatedData);
+  
+      setIsLoading(false);
+      setMessage(`Successfully deleted ${selectedRows.length} items.`);
     } catch (error) {
       console.error(error);
-      setMessage(`Error adding data: ${error.message}`);
+      setMessage(`Error deleting data: ${error.message}`);
+      setIsLoading(false);
     }
-  };
-  
+    fetchData();
+  };  
 
-  const handleSearch = (searchCriteria) => {
-    // ????????????????
-    console.log('Search Criteria:', searchCriteria);
-  };
+  const handleSearch = async (searchCriteria) => {
+    setIsLoading(true);
+    let HTTPrequest
+    let settings = searchCriteria.id ? {...containerKey.tableSettings, singular: true} : containerKey.tableSettings;
+    
+    try {
+      if (searchCriteria.id) {
+        HTTPrequest = buildApiFunction({ ...apiParams('get'), id: searchCriteria.id });
+        
+      } else {
+        HTTPrequest = buildApiFunction({ ...apiParams('search'), data: searchCriteria });
+      }
+      const response = await HTTPrequest();
+      settableSettings(settings);
+      setData(response);
+      setIsLoading(false);
+      setMessage(`Found ${response.length} results.`);
+    } catch (error) {
+      console.error(error);
+      setMessage(`Error fetching : ${error.message}`);
+      setIsLoading(false);
+    }
+  };  
 
   if (data) {
     return (

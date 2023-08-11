@@ -1,210 +1,50 @@
-import Home from '../components/anonymous/Home'
-import Login from '../components/anonymous/Login'
-import Registration from '../components/anonymous/Registration'
+import { apisSettings, defaultTableSettings } from '../utils/ConfigUtils';
 
 const AnonymousOptions = {
     Home: {
-        url: '/Home',
-        container: <Home/>,
-        tableSettings: {
-            title: [],
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        }
+        ...defaultTableSettings('Home'),
+        ...apisSettings(),
     },
     Login: {
-        url: '/Login',
-        container: <Login/>,
-        tableSettings: {
-            title: [],
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        },
-        apis: {
-            apiArray: 'AnonymousAPIs',
-            loginApi: 'login'
-        }
+        ...defaultTableSettings('Login'),
+        ...apisSettings(),
     },
     Registration: {
-        url: '/Registration',
-        container: <Registration/>,
-        tableSettings: {
-            title: [],
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        },
-        apis: {
-            apiArray: 'AnonymousAPIs',
-            Registration: 'addCustomer'
-        }
+        ...defaultTableSettings('Registration'),
+        ...apisSettings(),
     },
     FlightsTable: {
-        url: '/FlightsTable',
-        tableSettings: {
-            title: 'FlightsTable',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        },
-        apis: {
-            apiArray: 'BaseAPIs',
-            getApi: 'getAllFlights',
-            searchApi: ['getFlightById', 'getFlightsByParameters']
-        }
+        ...defaultTableSettings('FlightsTable', false),
+        ...apisSettings(),
     },
     FlightDetails: {
-        url: '/FlightDetails',
-        tableSettings: {
-            title: 'FlightDetails',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        },
+        ...defaultTableSettings('FlightDetails', true),
+        ...apisSettings(),
     },
     AirlinesTable: {
-        url: '/AirlinesTable',
-        tableSettings: {
-            title: 'AirlinesTable',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        },
-        apis: {
-            apiArray: 'BaseAPIs',
-            gethApi: 'getAllAirlines',
-            searchApi: ['getAirlineById', 'getAirlineByParameters']
-        }
+        ...defaultTableSettings('AirlinesTable', false),
+        ...apisSettings(),
     },
-    AirlineDetails: {
-        url: '/AirlineDetails',
-        tableSettings: {
-            title: 'AirlineDetails',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        }
+    AirlineDetails: { 
+        ...defaultTableSettings('AirlineDetails', true),
+        ...apisSettings(),  
     },
     CountriesTable: {
-        url: '/CountriesTable',
-        tableSettings: {
-            title: 'CountriesTable',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: true,
-            filterByParameters: []
-        },
-        apis: {
-            apiArray: 'BaseAPIs',
-            getApi: 'getAllCountries',
-            searchApi: ['getCountryById']
-        }
+        ...defaultTableSettings('CountriesTable', false),
+        ...apisSettings(),
     },
     CountryDetails: {
-        url: '/CountryDetails',
-        tableSettings: {
-            title: 'CountryDetails',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        }
+        ...defaultTableSettings('CountryDetails', true),
+        ...apisSettings(),
     },
     TicketsTable: {
-        url: '/TicketsTable',
-        tableSettings:{
-            title: 'TicketsTable',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        }
+        ...defaultTableSettings('TicketsTable', false),
+        ...apisSettings(),
     },
     TicketDetails: {
-        url: '/TicketDetails',
-        tableSettings:{
-            title: 'TicketDetails',
-            image: [],
-            subjects: [],
-            details: [],
-            singular: true,
-            allowGet: true,
-            allowAdd: false,
-            allowUpdate: false,
-            allowDelete: false,
-            filterById: false,
-            filterByParameters: []
-        }
-    }
-}
+        ...defaultTableSettings('TicketDetails', true),
+        ...apisSettings(),
+    },
+};
 
-export default AnonymousOptions;
+export default  AnonymousOptions;
