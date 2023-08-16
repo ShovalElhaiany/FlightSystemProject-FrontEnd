@@ -2,11 +2,14 @@
   background-color: rgba(0, 0, 0, 0.789);
   color: white;
   padding: 20px;
+  right: 0;
+  width: 90%;
   bottom: 0;
-  margin-left: 200px;
-  margin-top: 150px;
-  width: 1700px;
+  position: relative;
+  margin-top: 100px;
+  margin-left: auto;
 }
+
 
 .footer-title {
   font-size: 36px;

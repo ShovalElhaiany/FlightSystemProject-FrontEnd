@@ -1,15 +1,21 @@
 .form-body {
-  top: 90px;
-  right: 50%;
-  flex-grow: 1;
-  padding: 40px;
+  display: flex;
   flex-direction: column;
+  width: 800px;
+  height: 1000px;
+  padding: 80px;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: white;
+  
+
+  position: relative;
+  left: 55%;
+  transform: translate(-50%, 15%);
+
+  
 }
 
 .submit{

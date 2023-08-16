@@ -1,13 +1,15 @@
 .side-menu {
   position: fixed;
-  width: 200px;
+  width: 10%;
   height: 100%;
   background-color: #007bff;
   color: #fff;
   padding: 10px;
-  padding-top: 70px;
+  padding-top: 30px;
   flex-basis: 130px;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: 80px;
 }
 
 .side-menu nav ul {

@@ -15,7 +15,10 @@ const sendRequest = async (method, url, data = null) => {
       url,
       data,
     });
-    return response.data;
+    return {
+      data: response.data,
+      headers: response.headers,
+    };
   } catch (error) {
     throw new Error(`Error sending ${method} request to ${url}: ${error.message}`);
   }

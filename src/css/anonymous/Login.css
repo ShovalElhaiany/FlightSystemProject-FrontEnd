@@ -1,9 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #e8e8e8;
-}
-
 .login-page {
   display: flex;
   flex-direction: column;
@@ -21,7 +15,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: absolute;
-  left: 50%;
+  left: 55%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
