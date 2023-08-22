@@ -5,7 +5,7 @@ import { Button, Col, Form, Row, Alert } from 'react-bootstrap';
 import '../../css/anonymous/Registertion.css';
 import buildApiFunction from '../../api/RequestsGenerator';
 
-function Registertion() {
+function Registertion({admin}) {
   const initialFormData = {
     username: '',
     password: '',
@@ -134,9 +134,9 @@ function Registertion() {
           <Form.Label><FontAwesomeIcon icon={faUserTag} /> User Role</Form.Label>
           <Form.Select onChange={handleUserRoleChange}>
             <option value="">Select Role</option>
-            <option value="Administrators">Administrator</option>
+            {admin && <option value="Administrators">Administrator</option>}
             <option value="Customers">Customer</option>
-            <option value="AirlineCompanies">Airline Company</option>
+            {admin && <option value="AirlineCompanies">Airline Company</option>}
           </Form.Select>
         </Form.Group>
       </Row>

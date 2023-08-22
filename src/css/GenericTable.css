@@ -1,3 +1,15 @@
+.GenericTable {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+  padding: 70px;
+  position: relative;
+  margin-top: 200px;
+  width: 80%;
+  left: 5%;
+  margin-bottom: 200px;
+}
+
 .GenericTable body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -69,20 +81,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-.GenericSearch {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 16px;
-}
-
-.GenericSearch input {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 8px;
-}
-
 @media screen and (max-width: 768px) {
   .container {
     padding: 16px;
@@ -106,8 +104,17 @@ button:hover {
     padding: 8px 0;
   }
 
-  .GenericSearch input {
-    padding: 6px 12px;
-    margin-right: 4px;
-  }
+}
+
+.table-image {
+  width: 150px;
+  height: 150px;;
+  border-radius: 50px;
+  width: 160px;;
+  height: 160px;
+}
+
+tbody tr:hover {
+  color: #ffffff;
+  background-color: #6b6b6b;
 }

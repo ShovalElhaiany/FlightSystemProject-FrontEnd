@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import PageNotFound from './components/base/PageNotFound.jsx';
-import pages from './config/Pages.js';
+import PageNotFound from './components/anonymous/PageNotFound';
+import { components, pages } from './config/Pages';
 import PageContent from './utils/PageContent.jsx';
 
 function getPage(page) {
@@ -12,9 +12,20 @@ function getPage(page) {
   if (pageData) {
     const { container, ...baseComponents } = pageData.content;
 
-    return (
-      <PageContent container={container} baseComponents={baseComponents} />
-    );
+    if (!pageData.settings.table) {
+      return (
+        <>
+        {container}
+        {Object.entries(baseComponents).map(([component, display]) => (
+          display && components[component]
+        ))}
+        </>
+    )}
+    if (pageData.settings.table) {
+      return (
+        <PageContent containerKey={container} baseComponents={baseComponents} />
+      );
+    }
   } else {
     return (
       <PageNotFound />
@@ -35,7 +46,7 @@ function App() {
         ))}
         <Route
           path="*"
-          element={<Navigate to="/" replace />}
+          element={<Navigate to="/Home" replace />}
         />
       </Routes>
     </BrowserRouter>

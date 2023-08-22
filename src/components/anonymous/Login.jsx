@@ -74,6 +74,15 @@ const Login = () => {
           <button type="submit" className="login-button">Login</button>
         </form>
         {message && <div style={{ color: messageColor }}>{message}</div>}
+        <p className="register-prompt">
+          Don't have an account? 
+          <span 
+            onClick={() => navigate("/Registration")} 
+            className="register-link"
+          >
+            Register here.
+          </span>
+        </p>
       </div>
     </div>
   );

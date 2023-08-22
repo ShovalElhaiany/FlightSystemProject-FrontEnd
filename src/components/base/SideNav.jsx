@@ -1,3 +1,5 @@
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import '../../css/base/SideNav.css';
 
@@ -6,13 +8,14 @@ const SideNav = () => {
     <div className="side-menu">
       <nav>
         <ul>
-          <li><a href="#">Flights</a></li>
-          <li><a href="#">Hotels</a></li>
-          <li><a href="#">Car Rentals</a></li>
-          <li><a href="#">Vacation Packages</a></li>
-          <li><a href="#">Cruises</a></li>
-          <li><a href="#">Activities</a></li>
-          <li><a href="#">Travel Insurance</a></li>
+          <li><a href="https://www.booking.com">Hotels</a></li>
+          <li><a href="https://www.kishrey-teufa.co.il">Deals</a></li>
+          <li><a href="https://www.royalcaribbean.com">Cruises</a></li>
+          <li><a href="https://www.rentalcars.com">Car Rentals</a></li>
+          <li><a href="https://www.passportcard.co.il">Travel Insurance</a></li>
+          <li><a href="#footer">Contact</a></li>
+          <li><a href="#footer">About</a></li>
+          <li className='login'><a href="/Login"><FontAwesomeIcon icon={faUser} /> Login</a></li>
         </ul>
       </nav>
     </div>

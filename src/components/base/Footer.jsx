@@ -5,7 +5,7 @@ import '../../css/base/Footer.css';
 
 function Footer() {
   return (
-    <footer className='footer'>
+    <footer className='footer' id='footer'>
       <h2 className='footer-title'>BiguTours</h2>
       <div className='footer-columns'>
         <div className='footer-column'>

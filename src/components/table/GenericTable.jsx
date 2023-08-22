@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import GenericSearch from './GenericSearch'
-import './styles.css'
+import '../../css/GenericTable.css'
 
 const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSearch }) => {
   const {
@@ -16,8 +16,24 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
     filterByParameters,
 
   } = tableWithInfo;
+
+  let modifiedTitle = title;
+
+  if (title.includes("Airline") || title.includes("Airlines")) {
+    modifiedTitle = "Airline";
+} else if (title.includes("Flight") || title.includes("Flights")) {
+    modifiedTitle = "Flight";
+} else if (title.includes("Customer") || title.includes("Customers")) {
+    modifiedTitle = "Customer";
+} else if (title.includes("Ticket") || title.includes("Tickets")) {
+    modifiedTitle = "Ticket";
+} else if (title.includes("Country") || title.includes("Countries")) {
+    modifiedTitle = "Country";
+} else if (title.includes("Admin") || title.includes("Admins")) {
+  modifiedTitle = "Admin";
+}
   
-  const defaultImage = `../../images/${title}.jpg`;
+  const defaultImage = `/Images/Table/${modifiedTitle}.jpg`;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetails, setEditedDetails] = useState([...details]);
@@ -84,19 +100,29 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
     setShowAddForm(true);
   };
 
+  const formatText = (subject) => {
+    return subject
+      .replace(/_/g, ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   return (
     <div className='GenericTable'>
       <h2>{title}</h2>
-      {image ? <img src={image} alt="Table header" /> : <img src={defaultImage} alt="Default Table header" />}
+      {image ? <img src={image} alt="Table header" className='table-image'/> : <img src={defaultImage} alt="Default Table header" className='table-image'/>
+      }
       <p>{message}</p>
+      {!singular && <GenericSearch filterById={filterById} filterByParameters={filterByParameters} onSearch={handleSearch} formatText={formatText} />}
   
       {allowAdd && showAddForm ? (
-        <form
+          <form
           onSubmit={(e) => {
             e.preventDefault();
             const newData = {};
             subjects.forEach((subject, index) => {
-              if (subject !== "id") {
+              if (subject !== "id" && subject !== "user_id") {
                 newData[subject] = newSubjects[index];
               }
             });
@@ -104,22 +130,35 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
           }}
         >
           {subjects.map((subject, index) => (
-            subject !== "id" ? (
+            subject !== "id" && subject !== "user_id" ? (
               <div key={index}>
-                <label>{subject}</label>
-                <input
-                  type="text"
-                  value={newSubjects[index]}
-                  onChange={(e) => {
-                    const updatedSubjects = [...newSubjects];
-                    updatedSubjects[index] = e.target.value;
-                    setNewSubjects(updatedSubjects);
-                  }}
-                />
+                <label>{formatText(subject)}</label>&nbsp;
+                {subject === "landing_time" || subject === "departure_time" ? (
+                  <input
+                    type="datetime-local"
+                    value={newSubjects[index]}
+                    onChange={(e) => {
+                      const updatedSubjects = [...newSubjects];
+                      updatedSubjects[index] = e.target.value;
+                      setNewSubjects(updatedSubjects);
+                    }}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={newSubjects[index]}
+                    onChange={(e) => {
+                      const updatedSubjects = [...newSubjects];
+                      updatedSubjects[index] = e.target.value;
+                      setNewSubjects(updatedSubjects);
+                    }}
+                  />
+                )}
               </div>
             ) : null
           ))}
-          <button type="submit">Submit</button>
+          <br />
+          <button type="submit">Submit</button>&nbsp;&nbsp;
           <button onClick={() => setShowAddForm(false)}>Cancel</button>
         </form>
       ) : singular ? (
@@ -127,8 +166,8 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
           <table>
             <thead>
               <tr>
-                <th>Subject</th>
-                <th>Detail</th>
+                <th><h4>Subjects</h4></th>
+                <th><h4>Details</h4></th>
               </tr>
             </thead>
             <tbody>
@@ -174,7 +213,7 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
                   {allowDelete && <span>Select All</span>}
                 </th>
                 {subjects.map((subject, index) => (
-                  <th key={index}>{subject}</th>
+                  <th key={index}>{formatText(subject)}</th>
                 ))}
               </tr>
             </thead>
@@ -201,8 +240,6 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
           {allowDelete && <button onClick={handleDelete}>Delete</button>}
         </div>
       )}
-  
-      {!singular && <GenericSearch filterById={filterById} filterByParameters={filterByParameters} onSearch={handleSearch} />}
     </div>
   );  
 };
