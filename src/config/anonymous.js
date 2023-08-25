@@ -3,27 +3,27 @@ import { createConfig } from '../utils/ConfigUtils';
 
 const AnonymousOptions = {
     FlightsTable: createConfig(
-        'FlightsTable', false, ['origin_country_id', 'destination_country_id', 'departure_time'],
+        'FlightsTable', false, false, ['origin_country_id', 'destination_country_id', 'departure_time'],
         [serverApis.BaseApi.getAllFlights, undefined, undefined, undefined, serverApis.BaseApi.getFlightsByParameters]
     ),
     FlightDetails: createConfig(
-        'FlightDetails', true, [],
+        'FlightDetails', true, true, [],
         [serverApis.BaseApi.getFlightById]
     ),
     AirlinesTable: createConfig(
-        'AirlinesTable', false, ['name', 'country_id'],
+        'AirlinesTable', false, false, ['name', 'country_id'],
         [serverApis.BaseApi.getAllAirlines, undefined, undefined, undefined, serverApis.BaseApi.getAirlineByParameters]
     ),
     AirlineDetails: createConfig(
-        'AirlineDetails', true, [],
+        'AirlineDetails', true, true, [],
         [serverApis.BaseApi.getAirlineById]
     ),
     CountriesTable: createConfig(
-        'CountriesTable', false, [],
+        'CountriesTable', false, false, [],
         [serverApis.BaseApi.getAllCountries]
     ),
     CountryDetails: createConfig(
-        'CountryDetails', true, [],
+        'CountryDetails', true, true, [],
         [serverApis.BaseApi.getCountryById]
     )
 };

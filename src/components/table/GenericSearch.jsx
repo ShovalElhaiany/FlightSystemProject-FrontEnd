@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../css/GenericSearch.css';
+import '../../css/table/GenericSearch.css';
 
 const GenericSearch = ({ filterByParameters, onSearch, formatText }) => {
   const [parameters, setParameters] = useState({});

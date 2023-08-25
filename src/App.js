@@ -1,13 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import {React, useEffect, useState} from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import PageNotFound from './components/anonymous/PageNotFound';
 import { components, pages } from './config/Pages';
 import PageContent from './utils/PageContent.jsx';
 
-function getPage(page) {
+function GetPage(page) {
   const pageData = pages[page];
+  const [userRole, setUserRole] = useState(sessionStorage.getItem('role'))
+
+  useEffect(() => {
+    window.addEventListener('storage', () => {
+      console.log("Change to local storage!"); 
+      setUserRole(sessionStorage.getItem('role'))
+  })},[])
 
   if (pageData) {
     const { container, ...baseComponents } = pageData.content;
@@ -21,9 +28,13 @@ function getPage(page) {
         ))}
         </>
     )}
-    if (pageData.settings.table) {
+    if (pageData.settings.table && userRole === pageData.settings.role) {
       return (
         <PageContent containerKey={container} baseComponents={baseComponents} />
+      );
+    } else {
+      return (
+        <PageNotFound />
       );
     }
   } else {
@@ -34,6 +45,10 @@ function getPage(page) {
 }
 
 function App() {
+  if (!sessionStorage.getItem("role")) {
+    window.sessionStorage.setItem("role", "anonymous");
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -41,7 +56,7 @@ function App() {
           <Route
             key={page}
             path={pages[page].settings.url + '/*'}
-            element={getPage(page)}
+            element={GetPage(page)}
           />
         ))}
         <Route

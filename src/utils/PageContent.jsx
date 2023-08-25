@@ -17,7 +17,7 @@ const PageContent = ({ containerKey, baseComponents }) => {
              element={<GenericReceiver tableKey={value} />} />
          ))}
        </Routes>
-       <div>
+       <div className="page-base-components">
          {Object.entries(baseComponents).map(([component, display]) => (
            display && components[component]
          ))}

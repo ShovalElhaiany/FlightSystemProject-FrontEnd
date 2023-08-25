@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import GenericSearch from './GenericSearch'
-import '../../css/GenericTable.css'
+import '../../css/table/GenericTable.css'
 
 const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSearch }) => {
   const {
@@ -9,6 +9,7 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
     subjects,
     details,
     singular,
+    id,
     allowAdd,
     allowUpdate,
     allowDelete,

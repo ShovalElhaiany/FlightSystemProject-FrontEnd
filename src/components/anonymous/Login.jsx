@@ -12,41 +12,47 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const loginData = { username, password };
-
+  
     const apiParams = {
       method: 'POST',
       url: '/user/login',
       data: loginData,
     };
-
+  
     try {
       const response = await buildApiFunction(apiParams)();
       const userRole = response.headers['x-user-role'];
+      const userId = response.headers['x-user-id'];
 
-      let path;
+      let role;
       switch (userRole) {
-        case '1': path = '/admin'; break;
-        case '2': path = '/customer'; break;
-        case '3': path = '/airline'; break;
-        default: path = '/login'; break; 
+        case '1': role = 'admin'; break;
+        case '2': role = 'customer'; break;
+        case '3': role = 'airline'; break;
       }
-
-      const messages = Array.isArray(response.data) ? response.data : (typeof response.data === 'object' ? Object.values(response.data) : [response.data.toString()]);
-      setMessage(messages);
-      switch (messages[0]) {
-        case 'Login successful!': setMessageColor('green'); break;
-        default: setMessageColor('red'); break;
+      if (userRole) {
+        const credentials = {
+          password: password,
+          username: username
+        };
+        window.sessionStorage.setItem("credentials", JSON.stringify(credentials));
+        window.sessionStorage.setItem("role", role);
+        window.sessionStorage.setItem("id", userId);
+        window.dispatchEvent(new Event("storage"));
+        setMessageColor('green');
+        setMessage('Login successful!');
+        setTimeout(() => {
+          navigate("/Home");
+        }, 1000);
+      } else {
+        setMessageColor('red');
+        setMessage('Login failed');
       }
-      
-  
-      setTimeout(() => {
-        navigate(path);
-      }, 1000);
   
     } catch (error) {
-      setMessage([error.message || 'Login failed']);
+      setMessage('Login failed');
       setMessageColor('red');
       console.error('Login failed:', error.message);
     }

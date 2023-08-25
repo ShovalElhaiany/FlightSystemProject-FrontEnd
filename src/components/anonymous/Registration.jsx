@@ -55,10 +55,20 @@ function Registertion({admin}) {
     }));
   };
 
-  const handleUserRoleChange = (e) => {
-    setFormData(initialFormData);
-    handleChange(e);
-  };
+const handleUserRoleChange = (e) => {
+    const { id, value } = e.target;
+    const resetObject = additionalFields.reduce((acc, field) => {
+      acc[field.id] = '';
+      return acc;
+    }, {});
+
+    setFormData((prevData) => ({
+      ...prevData,
+      ...resetObject,
+      [id]: value
+    }));
+};
+
 
   const passwordsMatch = () => formData.password === formData.confirmPassword;
 

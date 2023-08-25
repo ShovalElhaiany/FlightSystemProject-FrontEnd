@@ -16,13 +16,13 @@ const GenericReceiver = ({ tableKey }) => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const idParam = tableKey.tableSettings.singular ? idFromURL : undefined;
+      const idParam = tableKey.tableSettings.id ? idFromURL : undefined;
       const HTTPrequest = buildApiFunction({ ...apiParams('get'), id: idParam });
       const response = await HTTPrequest();
       if (response) {
         setTableSettings(tableKey.tableSettings)
         setData(response.data);
-        if (!tableKey.tableSettings?.singular) {
+        if (!tableKey.tableSettings?.id) {
           setMessage(`Found ${Array.isArray(response.data) ? response.data.length : 1} results.`);
         }
         setIsLoading(false);
@@ -122,7 +122,7 @@ const GenericReceiver = ({ tableKey }) => {
   const handleSearch = async (searchCriteria) => {
     setIsLoading(true);
     let HTTPrequest
-    let settings = searchCriteria.id ? {...tableKey.tableSettings, singular: true} : tableKey.tableSettings;
+    let settings = searchCriteria.id ? {...tableKey.tableSettings, id: true} : tableKey.tableSettings;
     
     try {
       if (searchCriteria.id) {
