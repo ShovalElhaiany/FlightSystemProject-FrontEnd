@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GenericSearch from './GenericSearch'
 import '../../css/table/GenericTable.css'
+import SingularAndPlural from '../../config/SingularAndPlural';
 
 const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSearch }) => {
+  // Destructure properties from the passed in table configuration and data  
   const {
     title,
     image,
@@ -18,8 +20,9 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
 
   } = tableWithInfo;
 
+  // Modify the title to get a singular format for creating a default image path
   let modifiedTitle = title;
-
+  // Check and set title for specific keywords
   if (title.includes("Airline") || title.includes("Airlines")) {
     modifiedTitle = "Airline";
 } else if (title.includes("Flight") || title.includes("Flights")) {
@@ -33,9 +36,11 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
 } else if (title.includes("Admin") || title.includes("Admins")) {
   modifiedTitle = "Admin";
 }
-  
+
+  // Construct the default image path based on the modified title
   const defaultImage = `/Images/Table/${modifiedTitle}.jpg`;
 
+  // Use useState for managing component's internal state
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetails, setEditedDetails] = useState([...details]);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -45,6 +50,21 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
   const [newSubjects, setNewSubjects] = useState(subjects.map(() => ''));
   const [newDetails] = useState(details.map(() => ''));
 
+  const handleRowClick = (id) => {
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split('/');
+    
+    // Check if ID is already present
+    if (pathSegments.includes(id.toString())) {
+      return;
+    }
+  
+    const newPath = `${SingularAndPlural[pathSegments[2]]}/${id}`;
+    window.location.href = newPath; // This will cause a full page reload and navigate to the new URL
+  };
+  
+
+  // Handlers and utility functions
   const handleAdd = (newData) => {
     if (onAdd) {
       onAdd(newData);
@@ -101,6 +121,7 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
     setShowAddForm(true);
   };
 
+  // A utility function to format the subject texts for display
   const formatText = (subject) => {
     return subject
       .replace(/_/g, ' ')
@@ -112,11 +133,16 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
   return (
     <div className='GenericTable'>
       <h2>{title}</h2>
+
+      {/* Decide which image to show based on the availability of a custom image */}
       {image ? <img src={image} alt="Table header" className='table-image'/> : <img src={defaultImage} alt="Default Table header" className='table-image'/>
       }
       <p>{message}</p>
+
+      {/* Render the search component if not displaying a singular table */}
       {!singular && <GenericSearch filterById={filterById} filterByParameters={filterByParameters} onSearch={handleSearch} formatText={formatText} />}
   
+      {/* Rendering based on conditions: whether to show Add Form, Singular table or General table */}
       {allowAdd && showAddForm ? (
           <form
           onSubmit={(e) => {
@@ -160,7 +186,8 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
           ))}
           <br />
           <button type="submit">Submit</button>&nbsp;&nbsp;
-          <button onClick={() => setShowAddForm(false)}>Cancel</button>
+          <br />
+          <button onClick={() => setShowAddForm(false)}>Cancel</button>&nbsp;&nbsp;
         </form>
       ) : singular ? (
         <div>
@@ -196,9 +223,15 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
           </table>
           {allowUpdate && (
             isEditing ? (
-              <button onClick={handleSave}>Save</button>
+              <>
+                <br />
+                <button onClick={handleSave}>Save</button>&nbsp;&nbsp;
+              </>
             ) : (
-              <button onClick={handleUpdate}>Edit</button>
+              <>
+                <br />
+                <button onClick={handleUpdate}>Edit</button>&nbsp;&nbsp;
+              </>
             )
           )}
         </div>
@@ -220,8 +253,10 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
             </thead>
             <tbody>
               {details.map((detailRow, rowIndex) => (
-                <tr key={rowIndex}>
-                  <td>
+              <tr 
+                key={rowIndex} 
+                onClick={() => handleRowClick(detailRow[0])} // Assuming id is the first element in each 'detailRow'
+              >                   <td>
                     {allowDelete && (
                       <input
                         type="checkbox"
@@ -237,8 +272,10 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
               ))}
             </tbody>
           </table>
-          {allowAdd && !showAddForm && <button onClick={showForm}>Add</button>}
-          {allowDelete && <button onClick={handleDelete}>Delete</button>}
+          <br />
+          {allowAdd && !showAddForm && <button onClick={showForm}>Add</button>}&nbsp;&nbsp;
+          <br />
+          {allowDelete && <button onClick={handleDelete}>Delete</button>}&nbsp;&nbsp;
         </div>
       )}
     </div>

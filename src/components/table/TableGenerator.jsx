@@ -2,42 +2,50 @@ import React, { useState, useEffect } from 'react';
 import GenericTable from './GenericTable';
 import buildApiFunction from '../../api/RequestsGenerator.js';
 
-const GenericReceiver = ({ tableKey }) => {
+const TableGenerator = ({ tableKey }) => {
+  // States for holding data, table settings, messages, and loading status
   const [data, setData] = useState(null);
   const [tableSettings, setTableSettings] = useState(null);
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Extract the last segment from the URL, assuming it's an ID
   const pathSegments = window.location.pathname.split('/');
   const idFromURL = pathSegments[pathSegments.length - 1];
 
+  // Helper function to get API parameters for specific operations
   const apiParams = (operation) => tableKey.apisSettings[operation];
 
+  // Fetch data from the server and set it into state
   const fetchData = async () => {
     setIsLoading(true);
     try {
       const idParam = tableKey.tableSettings.id ? idFromURL : undefined;
       const HTTPrequest = buildApiFunction({ ...apiParams('get'), id: idParam });
       const response = await HTTPrequest();
+
       if (response) {
-        setTableSettings(tableKey.tableSettings)
+        setTableSettings(tableKey.tableSettings);
         setData(response.data);
+
         if (!tableKey.tableSettings?.id) {
           setMessage(`Found ${Array.isArray(response.data) ? response.data.length : 1} results.`);
         }
-        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
       setMessage(`Error fetching: ${error.message}`);
+    } finally {
       setIsLoading(false);
     }
   };
 
+  // Trigger data fetch on component mount
   useEffect(() => {
     fetchData();
   }, []);
 
+  // Extract table subjects and details from the fetched data
   const extractSubjectsAndDetails = () => {
     let subjects = [];
     let details = [];
@@ -53,6 +61,7 @@ const GenericReceiver = ({ tableKey }) => {
     return { ...tableSettings, subjects, details };
   };
 
+  // Add, Update, Delete, and Search handlers
   const handleAdd = async (newData) => {
     try {
       const HTTPrequest = buildApiFunction({ ...apiParams('add'), data: newData });
@@ -143,9 +152,8 @@ const GenericReceiver = ({ tableKey }) => {
     }
   };  
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // Rendering logic
+  if (isLoading) return <div>Loading...</div>;
 
   if (data) {
     return (
@@ -163,4 +171,4 @@ const GenericReceiver = ({ tableKey }) => {
   return null;
 };
 
-export default GenericReceiver;
+export default TableGenerator;

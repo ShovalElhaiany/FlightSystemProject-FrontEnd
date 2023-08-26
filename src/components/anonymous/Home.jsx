@@ -1,49 +1,46 @@
 import React from 'react';
-import '../../css/anonymous/Home.css'
+import '../../css/anonymous/Home.css';
+
+// Data for media items to improve maintainability and scalability.
+const MEDIA_ITEMS = [
+    { type: 'image', src: './images/base/flight.jpg', alt: 'Flights', title: 'Explore Flights' },
+    { type: 'image', src: './images/base/vacation.jpg', alt: 'Vacation', title: 'Plan Your Vacation' },
+    { type: 'video', src: './videos/destinations.mp4', title: 'Discover Destinations' },
+    { type: 'image', src: './images/base/cruise.jpg', alt: 'Cruise', title: 'Cruise Packages' },
+    { type: 'image', src: './images/base/hotel.jpg', alt: 'Hotels', title: 'Find Hotels' },
+    { type: 'image', src: './images/base/car-rental.jpg', alt: 'Car Rentals', title: 'Rent a Car' },
+];
 
 const Home = () => {
-  return (
-    <div className="content-container">
-      <img src="/Images/logo.jpg" alt="logo" className='logo-image'/>
-      <h1 className="main-title">Welcome to BiguToures</h1>
-      <div className="buttons-container">
-        <button className="primary-button">Book Now</button>
-        <button className="secondary-button">Deals & Discounts</button>
-        <button className="secondary-button">Contact Us</button>
-        <button className="secondary-button">Track Flight</button>
-      </div>
-      <div className="media-container">
-        <div className="media-item">
-          <img src="./images/flight.jpg" alt="Flights" className="media-image" />
-          <h3 className="media-title">Explore Flights</h3>
+    return (
+        <div className="content-container">
+            {/* Logo and Title Section */}
+            <img src="/Images/logo.jpg" alt="logo" className='logo-image' />
+            <h1 className="main-title">Welcome to BiguToures</h1>
+
+            {/* Button Actions Section */}
+            <div className="buttons-container">
+                <button className="primary-button">Book Now</button>
+                <button className="secondary-button">Deals & Discounts</button>
+                <button className="secondary-button">Contact Us</button>
+                <button className="secondary-button">Track Flight</button>
+            </div>
+
+            {/* Media Display Section: Displays images and videos */}
+            <div className="media-container">
+                {MEDIA_ITEMS.map((item, index) => (
+                    <div key={index} className="media-item">
+                        {item.type === 'image' ? (
+                            <img src={item.src} alt={item.alt} className="media-image" />
+                        ) : (
+                            <video src={item.src} controls className="media-video"></video>
+                        )}
+                        <h3 className="media-title">{item.title}</h3>
+                    </div>
+                ))}
+            </div>
         </div>
-        <div className="media-item">
-          <img src="./images/vacation.jpg" alt="Vacation" className="media-image" />
-          <h3 className="media-title">Plan Your Vacation</h3>
-        </div>
-        <div className="media-item">
-          <video
-            src="./videos/destinations.mp4"
-            controls
-            className="media-video"
-          ></video>
-          <h3 className="media-title">Discover Destinations</h3>
-        </div>
-        <div className="media-item">
-          <img src="./images/cruise.jpg" alt="Cruise" className="media-image" />
-          <h3 className="media-title">Cruise Packages</h3>
-        </div>
-        <div className="media-item">
-          <img src="./images/hotel.jpg" alt="Hotels" className="media-image" />
-          <h3 className="media-title">Find Hotels</h3>
-        </div>
-        <div className="media-item">
-          <img src="./images/car-rental.jpg" alt="Car Rentals" className="media-image" />
-          <h3 className="media-title">Rent a Car</h3>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Home;

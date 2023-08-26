@@ -1,57 +1,64 @@
 import React, { useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../css/anonymous/Login.css';
 import buildApiFunction from '../../api/RequestsGenerator';
 
 const Login = () => {
+  // State hooks for input fields and feedback messages.
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState(null);
   const [messageColor, setMessageColor] = useState('');
 
+  // Hook to programmatically navigate to other routes.
   const navigate = useNavigate();
 
+  // Helper function to translate user role codes to human-readable roles.
+  const getRoleFromCode = (code) => {
+    switch (code) {
+      case '1': return 'admin';
+      case '2': return 'customer';
+      case '3': return 'airline';
+      default: return null;
+    }
+  };
+
+  // Function to handle form submission for login.
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const loginData = { username, password };
+    e.preventDefault(); // Prevent default form behavior.
+
+    const loginData = { username, password }; // Prepare data for API call.
   
     const apiParams = {
       method: 'POST',
       url: '/user/login',
       data: loginData,
     };
-  
+
     try {
-      const response = await buildApiFunction(apiParams)();
+      const response = await buildApiFunction(apiParams)(); // Make API call.
       const userRole = response.headers['x-user-role'];
       const userId = response.headers['x-user-id'];
+      const role = getRoleFromCode(userRole); // Translate role code.
 
-      let role;
-      switch (userRole) {
-        case '1': role = 'admin'; break;
-        case '2': role = 'customer'; break;
-        case '3': role = 'airline'; break;
-      }
-      if (userRole) {
-        const credentials = {
-          password: password,
-          username: username
-        };
+      // If the role exists, store the user info and navigate to home.
+      if (role) {
+        const credentials = { password, username };
         window.sessionStorage.setItem("credentials", JSON.stringify(credentials));
         window.sessionStorage.setItem("role", role);
         window.sessionStorage.setItem("id", userId);
         window.dispatchEvent(new Event("storage"));
-        setMessageColor('green');
+
         setMessage('Login successful!');
-        setTimeout(() => {
-          navigate("/Home");
-        }, 1000);
+        setMessageColor('green');
+
+        setTimeout(() => navigate("/Home"), 1000); // Navigate after 1 second.
       } else {
-        setMessageColor('red');
         setMessage('Login failed');
+        setMessageColor('red');
       }
-  
     } catch (error) {
+      // If an error occurs, display a fail message.
       setMessage('Login failed');
       setMessageColor('red');
       console.error('Login failed:', error.message);
@@ -59,10 +66,12 @@ const Login = () => {
   };
 
   return (
+    // Login page UI.
     <div className="login-page">
       <div className="login-container">
         <h2 className="login-title">Login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
+          {/* Input fields for username and password */}
           <input 
             type="text" 
             placeholder="Username" 
@@ -79,13 +88,12 @@ const Login = () => {
           />
           <button type="submit" className="login-button">Login</button>
         </form>
+        {/* Display feedback message after login attempt */}
         {message && <div style={{ color: messageColor }}>{message}</div>}
+        {/* Navigation link to registration page */}
         <p className="register-prompt">
           Don't have an account? 
-          <span 
-            onClick={() => navigate("/Registration")} 
-            className="register-link"
-          >
+          <span onClick={() => navigate("/Registration")} className="register-link">
             Register here.
           </span>
         </p>

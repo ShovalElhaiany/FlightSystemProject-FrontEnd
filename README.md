@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Flight System Project - FrontEnd
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Project Description](#project-description)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Installation and Activation](#installation-and-activation)
+- [Usage](#usage)
+- [Acknowledgments](#acknowledgments)
+- [Contact](#contact)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Project Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Flight System Project - FrontEnd serves as the user interface for the corresponding backend system. Written in React.js, the website, named BigUTours, is a platform for selling airline tickets. It offers a range of features for different types of users: administrators, customers, and airlines, as well as anonymous users. This intuitive interface displays airlines, flights, tickets, and countries, enabling seamless interaction and management.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Types and Access
 
-### `npm run build`
+The site caters to four different types of users, each with unique permissions:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Anonymous**: Limited functionality before login
+2. **Admin**: Comprehensive control over data management
+3. **Customer**: Customer-specific features like ticket management
+4. **Airline**: Airline-centric features for flight management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Site Options by User Type
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Anonymous Mode**: 
+    - View all flights, airlines, countries
+    - Search capabilities
+    - Login and customer registration
 
-### `npm run eject`
+- **Airline**:
+    - Update airline details
+    - Add, update, and delete flights
+    - View flights owned by the airline
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Admin**:
+    - View and manage all customers, airlines, and admins
+    - Add or delete airline, customer, and admin records
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will delete the single build dependency from your project.
+- **Customer**:
+    - Update customer profile
+    - Add, delete, and view tickets
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Architecture
 
-## Learn More
+### Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **App.js**: The primary entry point that routes URLs to display the appropriate pages, configured in `Pages.js`.
+- **PageGenerator**: Assembles the central part of the page, including tables, based on configurations from `Containers.js` and `Anonymous.js`.
+- **TableGenerator.jsx**: Handles the logic for data manipulation options such as search, addition, deletion, and updating.
+- **RequestsGenerator.js**: Processes and sends server requests via Axios.
+- **GenericTable.jsx & GenericSearch.jsx**: Dynamic components for data display and search functionality.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Additional Components
 
-### Code Splitting
+- **Static Components**: Ad.jsx, Footer.jsx, SideNav.jsx, TopNav.jsx are persistent across various pages.
+- **Home.jsx**: Displays a welcome page with various site options.
+- **Login.jsx**: Manages user authentication.
+- **PageNotFound.jsx**: Shown when a 404 error occurs.
+- **Registration.jsx**: Handles new user registration.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Project Flow
 
-### Analyzing the Bundle Size
+The `App.js` file receives URLs and routes them to the appropriate page components. Dynamic data tables are generated based on configurations and the required data is fetched using Axios requests. The data is then displayed in a dynamic, interactive table.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Installation and Activation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+To get started, follow these steps:
 
-### Advanced Configuration
+1. Open your terminal and navigate to the project directory.
+2. Run the following command to start the project:
+    ```bash
+    npm run start
+    ```
+3. Open your browser and access `http://localhost:3000/`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This frontend serves as a comprehensive interface for the Flight System Project - BackEnd. It aims to make the system's data and functionalities accessible to various types of users, ensuring an efficient and user-friendly experience.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+
+Special thanks to Danny Aram for imparting the essential skills and knowledge that contributed to the development of this frontend project.
+
+---
+
+## Contact
+
+For any queries, feedback, or issues related to the Flight System Project, please contact:
+
+- **Name**: Shoval Elhaiany
+- **Phone Number**: +972503413413
+- **Email**: shoval.elhaiany@gmail.com
+
