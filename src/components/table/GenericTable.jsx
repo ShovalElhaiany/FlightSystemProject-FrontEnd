@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import GenericSearch from './GenericSearch'
 import '../../css/table/GenericTable.css'
 import SingularAndPlural from '../../config/SingularAndPlural';
