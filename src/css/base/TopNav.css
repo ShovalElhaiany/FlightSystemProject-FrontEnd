@@ -43,5 +43,8 @@
 }
 
 .registration {
-  margin-left: 1150px;
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
 }

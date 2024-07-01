@@ -31,6 +31,7 @@ const TopNav = () => {
           <li><a href={`/${path}/FlightsTable`}>Flights</a></li>
           <li><a href={`/${path}/AirlinesTable`}>Airlines</a></li>
           <li><a href={`/${path}/CountriesTable`}>Countries</a></li>
+          <li className='registration'><a href={`/Registration`}><FontAwesomeIcon icon={faAddressCard} /> Registration</a></li>
 
           {/* Conditional rendering for customer role */}
           { path === 'customer' && (
