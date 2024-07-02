@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the base URL for the API endpoint.
-const API_BASE_URL = 'http://flightsystemproject-backend.up.railway.app';
+const API_BASE_URL = 'https://flightsystemproject-backend.up.railway.app';
 
 // Create an axios instance with the specified base URL.
 const api = axios.create({
