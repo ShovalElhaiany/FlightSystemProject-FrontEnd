@@ -1,5 +1,5 @@
 # Start from a Node.js 20 base image
-FROM node:20
+FROM node:20 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -13,11 +13,17 @@ RUN npm install
 # Copy the rest of the source code from your local machine into the container
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
-
 # Build the React app
 RUN npm run build
 
-# Start the application
-CMD ["npm", "start"]
+# Use a lightweight web server to serve the static files
+FROM nginx:alpine
+
+# Copy the build output to the web server's root directory
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Start Nginx when the container launches
+CMD ["nginx", "-g", "daemon off;"]
