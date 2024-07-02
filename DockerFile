@@ -1,0 +1,23 @@
+# Start from a Node.js 20 base image
+FROM node:20
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json first for caching optimization
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the source code from your local machine into the container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Build the React app
+RUN npm run build
+
+# Start the application
+CMD ["npm", "start"]

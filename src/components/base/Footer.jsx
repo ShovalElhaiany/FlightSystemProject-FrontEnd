@@ -24,7 +24,7 @@ function Footer() {
             <li className='footer-li'><FontAwesomeIcon icon={faHouse} /> Mivtza Hiram 15</li>
             <li className='footer-li'><FontAwesomeIcon icon={faPhone} /> 050-3413413</li>
             <li className='footer-li'><FontAwesomeIcon icon={faEnvelope} /> shoval.elhaiany@gmail.com</li>
-            <li className='footer-li'><FontAwesomeIcon icon={faMusic} /> Spotipy/Shoval.Elahiny</li>
+            <li className='footer-li'><FontAwesomeIcon icon={faMusic} /> Spotify/Shoval.Elahiny</li>
           </ul>
         </div>
         
