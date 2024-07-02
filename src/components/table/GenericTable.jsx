@@ -48,7 +48,6 @@ const GenericTable = ({ tableWithInfo, message, onAdd, onUpdate, onDelete, onSea
   
   const [showAddForm, setShowAddForm] = useState(false);
   const [newSubjects, setNewSubjects] = useState(subjects.map(() => ''));
-  const [newDetails] = useState(details.map(() => ''));
 
   const handleRowClick = (id) => {
     const currentPath = window.location.pathname;
