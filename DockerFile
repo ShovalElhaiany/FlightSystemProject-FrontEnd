@@ -1,4 +1,4 @@
-# Start from a Node.js 16 base image
+# Start from a Node.js 20 base image
 FROM node:20
 
 # Set the working directory inside the container
@@ -16,5 +16,8 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the application
+# Build the React app
+RUN npm run build
+
+# Start the application
 CMD ["npm", "start"]
