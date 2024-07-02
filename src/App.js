@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import PageNotFound from './components/anonymous/PageNotFound';
-import { COMMON_COMPONENTS, pages } from './config/Pages';
+import { COMMON_COMPONENTS, pages } from './config/Pages.js';
 import PageGenerator from './utils/PageGenerator.jsx';
 
 const GetPage = ({ pageName }) => {
